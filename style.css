@@ -1,0 +1,25 @@
+:root {
+  --paper: #f3efe6;
+  --ink: #17150f;
+  --ink-2: #4a463c;
+  --line: #ddd6c6;
+  --signal: #ff4a1c;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.65 "Schibsted Grotesk", system-ui, sans-serif;
+}
+main { max-width: 720px; margin: 0 auto; padding: 56px 20px 80px; }
+header { display: flex; align-items: center; gap: 14px; margin-bottom: 40px; }
+header img { width: 44px; height: 44px; border-radius: 12px; }
+header a { font: italic 30px/1 "Instrument Serif", Georgia, serif; color: var(--ink); text-decoration: none; }
+h1 { font: 400 48px/1.05 "Instrument Serif", Georgia, serif; margin: 0 0 8px; }
+h2 { font: 400 26px/1.2 "Instrument Serif", Georgia, serif; margin: 36px 0 6px; }
+p, li { color: var(--ink-2); }
+a { color: var(--signal); }
+.muted { font-size: 13px; color: #8a8476; }
+nav { display: flex; gap: 18px; margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 14px; }
+code { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; display: block; word-break: break-all; font-size: 13px; }

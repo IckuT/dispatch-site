@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="referrer" content="no-referrer" />
+  <title>Returning to Dispatch…</title>
+  <link rel="stylesheet" href="../../style.css" />
+</head>
+<body>
+  <main>
+    <h1>Returning to Dispatch…</h1>
+    <p id="msg">One moment.</p>
+    <p class="muted" id="manual" hidden>
+      If nothing happens, make sure Dispatch is running on this computer, then
+      <a id="link" href="#">click here</a>.
+    </p>
+  </main>
+  <script>
+    // TikTok sends the sign-in result here (it requires a public https address).
+    // Pass it straight on to Dispatch running on this computer, or to the address saved
+    // in Dispatch's settings when it runs on a server.
+    (function () {
+      var params = new URLSearchParams(location.search);
+      var state = params.get("state") || "";
+      // Dispatch puts its own address at the start of "state": "<base64url address>.<random>"
+      var base = "http://localhost:3030";
+      var dot = state.indexOf(".");
+      if (dot > 0) {
+        try {
+          var decoded = atob(state.slice(0, dot).replace(/-/g, "+").replace(/_/g, "/"));
+          // Only this computer, or a secure (https) server address.
+          if (/^(http:\/\/(localhost|127\.0\.0\.1)(:\d+)?|https:\/\/[a-z0-9.-]+(:\d+)?)\/?$/i.test(decoded)) {
+            base = decoded.replace(/\/$/, "");
+          }
+        } catch (e) {}
+      }
+      var target = base + "/api/connect/tiktok/callback" + location.search;
+      document.getElementById("link").href = target;
+      document.getElementById("manual").hidden = false;
+      location.replace(target);
+    })();
+  </script>
+</body>
+</html>
